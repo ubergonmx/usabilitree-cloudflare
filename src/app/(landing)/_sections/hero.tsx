@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { DotPatternBackground } from "./dot-pattern-background";
+import { DotPatternBackground } from "../_components/dot-pattern-background";
 
 const ease = [0.16, 1, 0.3, 1];
 

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import Link from "next/link";
-import Logo from "./logo";
+import Logo from "../_components/logo";
 
 export function Header() {
   return (
