@@ -41,8 +41,14 @@ export default function FAQ() {
       question: "I encountered a bug; what should I do?",
       answer: (
         <span>
-          Please report the bug on GitHub or DM me on{" "}
-          <Button variant="linkHover1" className="p-0 after:w-[60px]">
+          Please report the bug on{" "}
+          <Button variant="linkHover1" className="p-0 after:w-12">
+            <a href="https://github.com/ubergonmx/usabilitree/issues/new" target="_blank">
+              GitHub
+            </a>
+          </Button>{" "}
+          or DM me on{" "}
+          <Button variant="linkHover1" className="p-0 after:w-[52px]">
             <a href="https://discord.com/users/263841596213035009" target="_blank">
               Discord
             </a>
