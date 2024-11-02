@@ -1,7 +1,7 @@
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { CodeIcon } from "@radix-ui/react-icons";
-const githubUrl = "https://github.com/ubergonmx/usabilitree";
+const githubUrl = "https://github.com/ubergonmx/usabilitree/issues/new";
 const githubAccountUrl = "https://github.com/ubergonmx";
 
 export function Footer() {
@@ -16,14 +16,13 @@ export function Footer() {
               aaronpal
             </a>
           </Button>
-          .
-          {/* . Get the source code from{" "}
+          . Report any issues on{" "}
           <Button variant="linkHover1" className="p-0 after:w-12">
             <a href={githubUrl} target="_blank">
               GitHub
             </a>
           </Button>
-          . */}
+          .
         </p>
         <div className="ml-auto">
           <ThemeToggle />

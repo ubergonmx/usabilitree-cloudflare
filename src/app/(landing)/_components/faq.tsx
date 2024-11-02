@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Section from "./section";
 import {
   Accordion,
@@ -41,9 +42,11 @@ export default function FAQ() {
       answer: (
         <span>
           Please report the bug on GitHub or DM me on{" "}
-          <a href="https://discord.com/users/263841596213035009" target="_blank">
-            Discord
-          </a>
+          <Button variant="linkHover1" className="p-0 after:w-[60px]">
+            <a href="https://discord.com/users/263841596213035009" target="_blank">
+              Discord
+            </a>
+          </Button>
           . I&apos;ll try to fix it as soon as possible. If you can fix it yourself, please submit a
           pull request.
         </span>
