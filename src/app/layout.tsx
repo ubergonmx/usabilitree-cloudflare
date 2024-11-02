@@ -4,12 +4,17 @@ import "./globals.css";
 
 import LightIcon from "@/app/icon-light.svg";
 import DarkIcon from "@/app/icon-dark.svg";
+import { ThemeProvider } from "@/providers/theme-provider";
+import { APP_TITLE } from "@/lib/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "UsabiliTree",
-  description: "Free tree testing tool to optimize your information architecture.",
+  title: {
+    default: APP_TITLE,
+    template: `%s | ${APP_TITLE}`,
+  },
+  description: "UsabiliTree - Grow your UX with Tree Testing",
   icons: {
     icon: [
       {
@@ -35,7 +40,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
