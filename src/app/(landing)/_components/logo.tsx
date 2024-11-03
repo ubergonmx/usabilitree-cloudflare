@@ -1,5 +1,5 @@
 import Image from "next/image";
-import TransparentIcon from "@/app/icon-transparent.svg";
+import TransparentIcon from "@/assets/icons/icon-transparent.svg";
 
 export default function Logo() {
   return (

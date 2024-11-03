@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css";
 
-import LightIcon from "@/app/icon-light.svg";
-import DarkIcon from "@/app/icon-dark.svg";
+import LightIcon from "@/assets/icons/icon-light.svg";
+import DarkIcon from "@/assets/icons/icon-dark.svg";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { APP_TITLE } from "@/lib/constants";
 

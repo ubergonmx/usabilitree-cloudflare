@@ -54,7 +54,7 @@ function HeroTitles() {
         </motion.span>
       </motion.h1>
       <motion.p
-        className="text-xl text-muted-foreground"
+        className="text-balance text-xl text-muted-foreground"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -63,9 +63,8 @@ function HeroTitles() {
           ease,
         }}
       >
-        Create, conduct, and analyze tree tests for free.
-        <br />
-        Optimize your information architecture with valuable insights.
+        Create, conduct, and analyze tree tests for free. Optimize your information architecture
+        with valuable insights.
       </motion.p>
     </div>
   );
