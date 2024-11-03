@@ -15,5 +15,19 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["tailwindcss", "typegen", "usabilitree"]
+  "cSpell.words": [
+    "aaronpal",
+    "clsx",
+    "compat",
+    "Lucide",
+    "nextjs",
+    "signup",
+    "sonner",
+    "tailwindcss",
+    "typegen",
+    "Usabili",
+    "usabilitree",
+    "vaul",
+    "vercel"
+  ]
 }
