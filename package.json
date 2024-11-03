@@ -10,6 +10,7 @@
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && wrangler pages dev",
     "deploy": "npm run pages:build && wrangler pages deploy",
+    "migrate-local": "wrangler d1 migrations apply usabilitree --local",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts",
     "types": "tsc --noEmit --pretty",
     "prettier": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",

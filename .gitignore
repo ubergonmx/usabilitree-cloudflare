@@ -27,6 +27,8 @@ yarn-error.log*
 
 # local env files
 .env*.local
+# due to "@t3-oss/env-nextjs" not detecting local env
+.env
 
 # vercel
 .vercel
