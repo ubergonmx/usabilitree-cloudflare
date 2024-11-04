@@ -5,11 +5,8 @@ import { EmailVerificationTemplate } from "./templates/email-verification";
 import { ResetPasswordTemplate } from "./templates/reset-password";
 import { render } from "@react-email/render";
 import { env } from "@/env";
-import { EMAIL_SENDER } from "@/lib/constants";
+// import { EMAIL_SENDER } from "@/lib/constants";
 // import { createTransport, type TransportOptions } from "nodemailer";
-import sgMail from "@sendgrid/mail";
-
-// sgMail.setApiKey(env.SENDGRID_API_KEY);
 
 export enum EmailTemplate {
   EmailVerification = "EmailVerification",
@@ -69,10 +66,43 @@ export const sendMail = async <T extends EmailTemplate>(
   // Uncomment if you're using nodemailer
   // return transporter.sendMail({ from: EMAIL_SENDER, to, subject, html: body });
 
-  return await sgMail.send({
-    from: EMAIL_SENDER,
-    to,
+  // return await sgMail.send({
+  //   from: EMAIL_SENDER,
+  //   to,
+  //   subject,
+  //   html: await body,
+  // });
+
+  const composeEmail = {
+    from: {
+      email: env.EMAIL_SENDER,
+      name: "Support",
+    },
     subject,
-    html: await body,
+    content: [
+      {
+        type: "text/html",
+        value: await body,
+      },
+    ],
+    personalizations: [
+      {
+        to: [
+          {
+            email: to,
+            name: "Recipient",
+          },
+        ],
+      },
+    ],
+  };
+
+  return await fetch("https://api.sendgrid.com/v3/mail/send", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.SENDGRID_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(composeEmail),
   });
 };
