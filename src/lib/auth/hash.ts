@@ -1,4 +1,4 @@
-import { scrypt, randomBytes } from "crypto";
+import { scrypt, randomBytes } from "node:crypto";
 
 // Define the type for the promisified scrypt function
 const scryptAsync = (
