@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { DotPatternBackground } from "../_components/dot-pattern-background";
+import Link from "next/link";
+import { Paths } from "@/lib/constants";
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -78,7 +80,7 @@ function HeroCTA() {
       transition={{ delay: 1, duration: 0.8, ease }}
     >
       <Button variant="expandIcon" Icon={ArrowRight} iconPlacement="right" className="pl-6">
-        Get Started
+        <Link href={Paths.Dashboard}>Get Started</Link>
       </Button>
     </motion.div>
   );
