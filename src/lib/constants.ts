@@ -1,5 +1,5 @@
 export const APP_TITLE = "UsabiliTree";
-export const EMAIL_SENDER = '"UsabiliTree" <noreply@usabilitree.com>';
+export const EMAIL_SENDER = '"UsabiliTree" <noreply@usabilitree.com>'; // for nodemailer
 export const CODE_LENGTH = 8;
 
 export enum Paths {
