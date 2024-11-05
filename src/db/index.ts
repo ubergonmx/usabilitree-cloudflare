@@ -1,6 +1,13 @@
-import { getRequestContext } from "@cloudflare/next-on-pages";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { drizzle } from "drizzle-orm/d1";
 
-const { env } = getRequestContext();
+let db: ReturnType<typeof drizzle>;
 
-export const db = drizzle(env.DB);
+async function initializeDB() {
+  const { env } = await getCloudflareContext();
+  db = drizzle(env.DB);
+}
+
+initializeDB();
+
+export { db };

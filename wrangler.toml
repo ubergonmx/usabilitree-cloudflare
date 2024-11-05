@@ -2,7 +2,8 @@
 name = "usabilitree"
 compatibility_date = "2024-10-22"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".vercel/output/static"
+assets = { directory = ".worker-next/assets", binding = "ASSETS" }
+# pages_build_output_dir = ".vercel/output/static"
 
 # Automatically place your workloads in an optimal location to minimize latency.
 # If you are running back-end logic in a Pages Function, running it closer to your back-end infrastructure
@@ -43,9 +44,9 @@ migrations_dir = "drizzle"
 # Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#kv-namespaces
 # KV Example:
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+[[kv_namespaces]]
+binding = "NEXT_CACHE_WORKERS_KV"
+id = "f32cd2319c06420ebb6f17ac0d11ef03"
 
 # Bind a Queue producer. Use this binding to schedule an arbitrary task that may be processed later by a Queue consumer.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#queue-producers
