@@ -6,7 +6,7 @@ import { Session, sessions, User, users } from "@/db/schema";
 import { eq } from "drizzle-orm/expressions";
 import { sha256 } from "@oslojs/crypto/sha2";
 import { getSessionToken } from "./session";
-import { db } from "@/db";
+import { initializeDB } from "@/db";
 
 export const discord = new Discord(
   env.DISCORD_CLIENT_ID,
@@ -43,6 +43,7 @@ export function generateId(length: number): string {
 }
 
 export async function createSession(token: string, userId: string): Promise<Session> {
+  const db = await initializeDB();
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
   const session: Session = {
     id: sessionId,
@@ -54,6 +55,7 @@ export async function createSession(token: string, userId: string): Promise<Sess
 }
 
 export async function validateRequest(): Promise<SessionValidationResult> {
+  const db = await initializeDB();
   const sessionToken = getSessionToken();
   if (!sessionToken) {
     return { session: null, user: null };
@@ -62,6 +64,7 @@ export async function validateRequest(): Promise<SessionValidationResult> {
 }
 
 export async function validateSessionToken(token: string): Promise<SessionValidationResult> {
+  const db = await initializeDB();
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
   const [sessionInDb] = await db.select().from(sessions).where(eq(sessions.id, sessionId));
   if (!sessionInDb) {
@@ -91,6 +94,7 @@ export async function validateSessionToken(token: string): Promise<SessionValida
 }
 
 export async function invalidateSession(sessionId: string): Promise<void> {
+  const db = await initializeDB();
   try {
     await db.delete(sessions).where(eq(sessions.id, sessionId));
   } catch (error) {
@@ -99,6 +103,7 @@ export async function invalidateSession(sessionId: string): Promise<void> {
 }
 
 export async function invalidateUserSessions(userId: string): Promise<void> {
+  const db = await initializeDB();
   try {
     await db.delete(sessions).where(eq(sessions.userId, userId));
   } catch (error) {

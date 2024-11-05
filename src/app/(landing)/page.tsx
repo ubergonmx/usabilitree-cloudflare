@@ -9,7 +9,7 @@ export const metadata = {
     "Create, conduct, and analyze tree tests for free. Optimize your information architecture with valuable insights.",
 };
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <Header />

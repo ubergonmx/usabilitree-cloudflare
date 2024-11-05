@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { isWithinExpirationDate, TimeSpan, createDate } from "oslo";
 import { generateRandomString, alphabet } from "oslo/crypto";
 import { eq } from "drizzle-orm";
-import { db } from "@/db";
+import { initializeDB } from "@/db";
 import {
   loginSchema,
   signupSchema,
@@ -27,6 +27,7 @@ export interface ActionResponse<T> {
 }
 
 export async function login(_: any, formData: FormData): Promise<ActionResponse<LoginInput>> {
+  const db = await initializeDB();
   const obj = Object.fromEntries(formData.entries());
 
   const parsed = loginSchema.safeParse(obj);
@@ -62,6 +63,7 @@ export async function login(_: any, formData: FormData): Promise<ActionResponse<
 }
 
 export async function signup(_: any, formData: FormData): Promise<ActionResponse<SignupInput>> {
+  const db = await initializeDB();
   const obj = Object.fromEntries(formData.entries());
 
   const parsed = signupSchema.safeParse(obj);
@@ -101,6 +103,7 @@ export async function signup(_: any, formData: FormData): Promise<ActionResponse
 }
 
 export async function logout(): Promise<{ error: string } | void> {
+  const db = await initializeDB();
   const session = await getCurrentUser();
   if (!session) {
     return {
@@ -116,6 +119,7 @@ export async function resendVerificationEmail(): Promise<{
   error?: string;
   success?: boolean;
 }> {
+  const db = await initializeDB();
   const user = await getCurrentUser();
   if (!user) {
     return redirect(Paths.Login);
@@ -137,6 +141,7 @@ export async function resendVerificationEmail(): Promise<{
 }
 
 export async function verifyEmail(_: any, formData: FormData): Promise<{ error: string } | void> {
+  const db = await initializeDB();
   const code = formData.get("code");
   if (typeof code !== "string" || code.length !== CODE_LENGTH) {
     return { error: "Invalid code" };
@@ -171,6 +176,7 @@ export async function sendPasswordResetLink(
   _: any,
   formData: FormData
 ): Promise<{ error?: string; success?: boolean }> {
+  const db = await initializeDB();
   const email = formData.get("email");
   const parsed = z.string().trim().email().safeParse(email);
   if (!parsed.success) {
@@ -197,6 +203,7 @@ export async function resetPassword(
   _: any,
   formData: FormData
 ): Promise<{ error?: string; success?: boolean }> {
+  const db = await initializeDB();
   const obj = Object.fromEntries(formData.entries());
 
   const parsed = resetPasswordSchema.safeParse(obj);
@@ -236,6 +243,7 @@ const timeFromNow = (time: Date) => {
 };
 
 async function generateEmailVerificationCode(userId: string, email: string): Promise<string> {
+  const db = await initializeDB();
   await db.delete(emailVerificationCodes).where(eq(emailVerificationCodes.userId, userId));
   const code = generateRandomString(CODE_LENGTH, alphabet("0-9")); // 8 digit code
   await db.insert(emailVerificationCodes).values({
@@ -248,6 +256,7 @@ async function generateEmailVerificationCode(userId: string, email: string): Pro
 }
 
 async function generatePasswordResetToken(userId: string): Promise<string> {
+  const db = await initializeDB();
   await db.delete(passwordResetTokens).where(eq(passwordResetTokens.userId, userId));
   const tokenId = generateId(40);
   await db.insert(passwordResetTokens).values({

@@ -3,11 +3,12 @@ import { OAuth2RequestError } from "arctic";
 import { generateId, google } from "@/lib/auth";
 import { setSession } from "@/lib/auth/session";
 import { Paths } from "@/lib/constants";
-import { db } from "@/db";
+import { initializeDB } from "@/db";
 import { eq, or } from "drizzle-orm";
 import { users } from "@/db/schema";
 
 export async function GET(request: Request): Promise<Response> {
+  const db = await initializeDB();
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
@@ -22,13 +23,10 @@ export async function GET(request: Request): Promise<Response> {
 
   try {
     const tokens = await google.validateAuthorizationCode(code, codeVerifier);
-    console.log(tokens);
-    console.log(tokens.accessToken);
-    console.log(tokens.idToken);
 
     const response = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
       headers: {
-        Authorization: `Bearer ${tokens.accessToken}`,
+        Authorization: `Bearer ${tokens.accessToken()}`,
       },
     });
     const googleUser: GoogleUser = await response.json();

@@ -3,12 +3,13 @@ import { generateId } from "@/lib/auth";
 import { OAuth2RequestError } from "arctic";
 import { eq, or } from "drizzle-orm";
 import { discord } from "@/lib/auth";
-import { db } from "@/db";
+import { initializeDB } from "@/db";
 import { Paths } from "@/lib/constants";
 import { users } from "@/db/schema";
 import { setSession } from "@/lib/auth/session";
 
 export async function GET(request: Request): Promise<Response> {
+  const db = await initializeDB();
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
@@ -23,13 +24,10 @@ export async function GET(request: Request): Promise<Response> {
 
   try {
     const tokens = await discord.validateAuthorizationCode(code);
-    console.log(tokens);
-    console.log(tokens.accessToken);
-    console.log(tokens.idToken);
 
     const discordUserRes = await fetch("https://discord.com/api/users/@me", {
       headers: {
-        Authorization: `Bearer ${tokens.accessToken}`,
+        Authorization: `Bearer ${tokens.accessToken()}`,
       },
     });
     const discordUser = (await discordUserRes.json()) as DiscordUser;

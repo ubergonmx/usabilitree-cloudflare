@@ -1,16 +1,26 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
 
 export function DotPatternBackground() {
-  const { theme } = useTheme();
+  const { theme: themeContext } = useTheme();
+  const [dotColor, setDotColor] = useState("var(--dot-pattern)");
 
-  const dotColor =
-    theme === undefined || theme === "system"
-      ? "var(--dot-pattern)"
-      : theme === "dark"
-        ? "38 38 38"
-        : "229 231 235";
+  let theme: string | null | undefined = themeContext;
+  if (typeof window !== "undefined") {
+    theme = localStorage.getItem("theme");
+  }
+
+  useEffect(() => {
+    if (theme === "system" || theme === null || theme === undefined) {
+      setDotColor("var(--dot-pattern)");
+    } else if (theme === "dark") {
+      setDotColor("38 38 38");
+    } else if (theme === "light") {
+      setDotColor("229 231 235");
+    }
+  }, [theme]);
 
   return (
     <div

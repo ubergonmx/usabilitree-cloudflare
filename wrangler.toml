@@ -1,17 +1,15 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "usabilitree"
 main = ".worker-next/index.mjs"
-compatibility_date = "2024-10-22"
-compatibility_flags = ["nodejs_compat_v2"]
-assets = { directory = ".worker-next/assets", binding = "ASSETS" }
-# pages_build_output_dir = ".vercel/output/static"
 
-# Automatically place your workloads in an optimal location to minimize latency.
-# If you are running back-end logic in a Pages Function, running it closer to your back-end infrastructure
-# rather than the end user may result in better performance.
-# Docs: https://developers.cloudflare.com/pages/functions/smart-placement/#smart-placement
-# [placement]
-# mode = "smart"
+compatibility_date = "2024-09-26"
+compatibility_flags = ["nodejs_compat"]
+
+# Minification helps to keep the Worker bundle size down and improve start up time.
+minify = true
+
+# Use the new Workers + Assets to host the static frontend files
+assets = { directory = ".worker-next/assets", binding = "ASSETS" }
 
 [[d1_databases]]
 binding = "DB"
@@ -23,25 +21,3 @@ migrations_dir = "drizzle"
 binding = "NEXT_CACHE_WORKERS_KV"
 id = "f32cd2319c06420ebb6f17ac0d11ef03"
 preview_id = "b43e9638bd314f2ea6b9bdd378aad3f9"
-
-# To use different bindings for preview and production environments, follow the examples below.
-# When using environment-specific overrides for bindings, ALL bindings must be specified on a per-environment basis.
-# Docs: https://developers.cloudflare.com/pages/functions/wrangler-configuration#environment-specific-overrides
-
-######## PREVIEW environment config ########
-
-# [env.preview.vars]
-# API_KEY = "xyz789"
-
-# [[env.preview.kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "<PREVIEW_NAMESPACE_ID>"
-
-######## PRODUCTION environment config ########
-
-# [env.production.vars]
-# API_KEY = "abc123"
-
-# [[env.production.kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "<PRODUCTION_NAMESPACE_ID>"
