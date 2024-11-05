@@ -22,10 +22,13 @@ export async function GET(request: Request): Promise<Response> {
 
   try {
     const tokens = await google.validateAuthorizationCode(code, codeVerifier);
+    console.log(tokens);
+    console.log(tokens.accessToken);
+    console.log(tokens.idToken);
 
     const response = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
       headers: {
-        Authorization: `Bearer ${tokens.data.access_token}`,
+        Authorization: `Bearer ${tokens.accessToken}`,
       },
     });
     const googleUser: GoogleUser = await response.json();

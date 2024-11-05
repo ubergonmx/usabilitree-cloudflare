@@ -23,10 +23,13 @@ export async function GET(request: Request): Promise<Response> {
 
   try {
     const tokens = await discord.validateAuthorizationCode(code);
+    console.log(tokens);
+    console.log(tokens.accessToken);
+    console.log(tokens.idToken);
 
     const discordUserRes = await fetch("https://discord.com/api/users/@me", {
       headers: {
-        Authorization: `Bearer ${tokens.data.access_token}`,
+        Authorization: `Bearer ${tokens.accessToken}`,
       },
     });
     const discordUser = (await discordUserRes.json()) as DiscordUser;
