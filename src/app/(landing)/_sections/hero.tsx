@@ -3,7 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { DotPatternBackground } from "./dot-pattern-background";
+import { DotPatternBackground } from "../_components/dot-pattern-background";
+import Link from "next/link";
+import { Paths } from "@/lib/constants";
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -54,7 +56,7 @@ function HeroTitles() {
         </motion.span>
       </motion.h1>
       <motion.p
-        className="text-xl text-muted-foreground"
+        className="text-balance text-xl text-muted-foreground"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -63,9 +65,8 @@ function HeroTitles() {
           ease,
         }}
       >
-        Create, conduct, and analyze tree tests for free.
-        <br />
-        Optimize your information architecture with valuable insights.
+        Create, conduct, and analyze tree tests for free. Optimize your information architecture
+        with valuable insights.
       </motion.p>
     </div>
   );
@@ -79,7 +80,7 @@ function HeroCTA() {
       transition={{ delay: 1, duration: 0.8, ease }}
     >
       <Button variant="expandIcon" Icon={ArrowRight} iconPlacement="right" className="pl-6">
-        Get Started
+        <Link href={Paths.Dashboard}>Get Started</Link>
       </Button>
     </motion.div>
   );

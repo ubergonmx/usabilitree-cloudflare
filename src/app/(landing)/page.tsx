@@ -1,7 +1,7 @@
-import { Header } from "./_components/header";
-import { HeroSection } from "./_components/hero";
-import { Footer } from "./_components/footer";
-import FAQ from "./_components/faq";
+import { Header } from "./_sections/header";
+import { HeroSection } from "./_sections/hero";
+import { Footer } from "./_sections/footer";
+import FAQ from "./_sections/faq";
 
 export const metadata = {
   title: "Free Tree Testing Tool",
@@ -9,7 +9,7 @@ export const metadata = {
     "Create, conduct, and analyze tree tests for free. Optimize your information architecture with valuable insights.",
 };
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <Header />

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import Section from "./section";
+import Section from "../_components/section";
 import {
   Accordion,
   AccordionContent,

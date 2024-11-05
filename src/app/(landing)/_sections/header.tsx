@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
 import Link from "next/link";
-import Logo from "./logo";
+import Logo from "@/components/logo";
+import { Paths } from "@/lib/constants";
 
 export function Header() {
   return (
@@ -10,9 +10,11 @@ export function Header() {
         <Logo />
       </Link>
       <div>
-        <Button size="sm" variant="secondary">
-          Login
-        </Button>
+        <Link href={Paths.Login}>
+          <Button size="sm" variant="secondary">
+            Login
+          </Button>
+        </Link>
       </div>
     </header>
   );
