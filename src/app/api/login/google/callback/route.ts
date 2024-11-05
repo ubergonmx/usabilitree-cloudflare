@@ -7,8 +7,6 @@ import { db } from "@/db";
 import { eq, or } from "drizzle-orm";
 import { users } from "@/db/schema";
 
-export const runtime = "edge";
-
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");

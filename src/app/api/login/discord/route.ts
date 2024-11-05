@@ -3,8 +3,6 @@ import { generateState } from "arctic";
 import { discord } from "@/lib/auth";
 import { env } from "@/env";
 
-export const runtime = "edge";
-
 export async function GET(): Promise<Response> {
   const state = generateState();
   const url = discord.createAuthorizationURL(state, ["identify", "email"]);

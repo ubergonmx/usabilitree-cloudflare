@@ -9,8 +9,6 @@ export const metadata = {
   description: "Forgot Password Page",
 };
 
-export const runtime = "edge";
-
 export default async function ForgotPasswordPage() {
   const user = await getCurrentUser();
 

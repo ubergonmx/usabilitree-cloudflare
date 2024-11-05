@@ -4,8 +4,6 @@ import { getCurrentUser } from "@/lib/auth/session";
 import { VerifyCode } from "./verify-code";
 import { Paths } from "@/lib/constants";
 
-export const runtime = "edge";
-
 export const metadata = {
   title: "Verify Email",
   description: "Verify Email Page",

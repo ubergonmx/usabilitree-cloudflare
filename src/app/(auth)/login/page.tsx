@@ -8,8 +8,6 @@ export const metadata = {
   description: "Login Page",
 };
 
-export const runtime = "edge";
-
 export default async function LoginPage() {
   const user = await getCurrentUser();
 

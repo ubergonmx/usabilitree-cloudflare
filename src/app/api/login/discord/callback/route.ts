@@ -8,8 +8,6 @@ import { Paths } from "@/lib/constants";
 import { users } from "@/db/schema";
 import { setSession } from "@/lib/auth/session";
 
-export const runtime = "edge";
-
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
