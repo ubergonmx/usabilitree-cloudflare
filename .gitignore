@@ -26,9 +26,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
-# due to "@t3-oss/env-nextjs" not detecting local env
 .env
+.env*.local
 
 # vercel
 .vercel
@@ -37,10 +36,18 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+
+# Cloudflare related
+/.save.next
+/.worker-next
+/.wrangler
+
 # wrangler files
 .wrangler
 .dev.vars
-.worker-next
 
 # eslint
 .eslintcache
+
+# drizzle (migration files)
+drizzle
