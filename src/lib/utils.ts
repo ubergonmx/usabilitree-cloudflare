@@ -1,4 +1,3 @@
-import { env } from "@/env";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -17,8 +16,4 @@ export function formatDate(
   return new Intl.DateTimeFormat("en-US", {
     ...options,
   }).format(new Date(date));
-}
-
-export function absoluteUrl(path: string) {
-  return new URL(path, env.NEXT_PUBLIC_APP_URL).href;
 }

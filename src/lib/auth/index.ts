@@ -1,6 +1,6 @@
 import { Discord, Google } from "arctic";
 import { env } from "@/env";
-import { absoluteUrl } from "@/lib/utils";
+import { absoluteUrl } from "@/lib/server-utils";
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { Session, sessions, User, users } from "@/db/schema";
 import { eq } from "drizzle-orm/expressions";
